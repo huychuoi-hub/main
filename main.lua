@@ -3573,13 +3573,4 @@ function chuoilib:ResetToggleColors()
     end
 end
 
-task.spawn(function()
-    task.wait(2)
-    chuoilib:Notify({
-        Title = "chuoiray ui",
-        Message = "UI chuoiray load Completed",
-        Duration = 10
-    })
-end)
-
 return chuoilib
