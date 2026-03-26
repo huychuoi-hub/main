@@ -8,9 +8,9 @@ local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local PlayerMouse = Player:GetMouse()
 
-local bearlib = {
+local chuoilib = {
     Themes = {
-        QuangHuy = {
+        hellocun = {
             ["Color Hub 1"] = ColorSequence.new({
                 ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 0)),
                 ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 0)),
@@ -41,7 +41,7 @@ local bearlib = {
     Save = {
         UISize = {550, 380},
         TabSize = 160,
-        Theme = "QuangHuy"
+        Theme = "hellocun"
     },
     Settings = {},
     Connection = {},
@@ -60,12 +60,12 @@ local bearlib = {
 local ViewportSize = workspace.CurrentCamera.ViewportSize
 local UIScale = ViewportSize.Y / 450
 
-local Settings = bearlib.Settings
-local Flags = bearlib.Flags
+local Settings = chuoilib.Settings
+local Flags = chuoilib.Flags
 
 local SetProps, SetChildren, InsertTheme, Create do
     InsertTheme = function(Instance, Type)
-        table.insert(bearlib.Instances, {
+        table.insert(chuoilib.Instances, {
             Instance = Instance,
             Type = Type
         })
@@ -114,9 +114,9 @@ local SetProps, SetChildren, InsertTheme, Create do
             local decode = HttpService:JSONDecode(readfile(file))
             
             if type(decode) == "table" then
-                if rawget(decode, "UISize") then bearlib.Save["UISize"] = decode["UISize"] end
-                if rawget(decode, "TabSize") then bearlib.Save["TabSize"] = decode["TabSize"] end
-                if rawget(decode, "Theme") and VerifyTheme(decode["Theme"]) then bearlib.Save["Theme"] = decode["Theme"] end
+                if rawget(decode, "UISize") then chuoilib.Save["UISize"] = decode["UISize"] end
+                if rawget(decode, "TabSize") then chuoilib.Save["TabSize"] = decode["TabSize"] end
+                if rawget(decode, "Theme") and VerifyTheme(decode["Theme"]) then chuoilib.Save["Theme"] = decode["Theme"] end
             end
         end
     end
@@ -173,7 +173,7 @@ local Funcs = {} do
     end
 end
 
-local Connections, Connection = {}, bearlib.Connection do
+local Connections, Connection = {}, chuoilib.Connection do
     local function NewConnectionList(List)
         if type(List) ~= "table" then return end
         
@@ -336,7 +336,7 @@ local function MakeDrag(Instance)
 end
 
 local function VerifyTheme(Theme)
-    for name,_ in pairs(bearlib.Themes) do
+    for name,_ in pairs(chuoilib.Themes) do
         if name == Theme then
             return true
         end
@@ -350,14 +350,14 @@ local function SaveJson(FileName, save)
     end
 end
 
-local Theme = bearlib.Themes[bearlib.Save.Theme]
+local Theme = chuoilib.Themes[chuoilib.Save.Theme]
 
 local function AddEle(Name, Func)
-    bearlib.Elements[Name] = Func
+    chuoilib.Elements[Name] = Func
 end
 
 local function Make(Ele, Instance, props, ...)
-    local Element = bearlib.Elements[Ele](Instance, props, ...)
+    local Element = chuoilib.Elements[Ele](Instance, props, ...)
     return Element
 end
 
@@ -506,7 +506,7 @@ local function GetColor(Instance)
     return ""
 end
 
-function bearlib:GetIcon(index)
+function chuoilib:GetIcon(index)
     if type(index) ~= "string" or index:find("rbxassetid://") or #index == 0 then
         return index
     end
@@ -529,24 +529,24 @@ function bearlib:GetIcon(index)
     return firstMatch or index
 end
 
-function bearlib:SetTheme(NewTheme)
+function chuoilib:SetTheme(NewTheme)
     if not VerifyTheme(NewTheme) then return end
     
-    bearlib.Save.Theme = NewTheme
-    SaveJson("bear library v8.1.json", bearlib.Save)
+    chuoilib.Save.Theme = NewTheme
+    SaveJson("bear library v8.1.json", chuoilib.Save)
     
     local OldTheme = Theme
-    Theme = bearlib.Themes[NewTheme]
+    Theme = chuoilib.Themes[NewTheme]
     
     if MainFrame then
-        if NewTheme == "QuangHuy" then
+        if NewTheme == "hellocun" then
             MainFrame.BackgroundTransparency = 0.03
         end
     end
     
     Connection:FireConnection("ThemeChanged", NewTheme)
     
-    for _, Val in pairs(bearlib.Instances) do
+    for _, Val in pairs(chuoilib.Instances) do
         if not Val.Instance or not Val.Instance.Parent then continue end
         
         if Val.Type == "Gradient" then
@@ -604,7 +604,7 @@ function bearlib:SetTheme(NewTheme)
         MinimizedTitle.TextColor3 = Theme["Color Text"]
     end
     
-    for _, TabData in pairs(bearlib.Tabs) do
+    for _, TabData in pairs(chuoilib.Tabs) do
         if TabData and TabData.func and TabData.func.Cont then
             local container = TabData.func.Cont
             local tabButton = container and container.Parent
@@ -639,7 +639,7 @@ function bearlib:SetTheme(NewTheme)
     print("Theme changed to:", NewTheme)
 end
 
-function bearlib:SetScale(NewScale)
+function chuoilib:SetScale(NewScale)
     NewScale = ViewportSize.Y / math.clamp(NewScale, 300, 2000)
     UIScale, ScreenGui.Scale.Scale = NewScale, NewScale
 end
@@ -653,7 +653,7 @@ local MinimizedContainer = nil
 local MinimizedIcon = nil
 local MinimizedTitle = nil
 
-function bearlib:MakeWindow(Configs)
+function chuoilib:MakeWindow(Configs)
     local WTitle = Configs[1] or Configs.Name or Configs.Title or "bear Library v8.1"
     local WMiniText = Configs[2] or Configs.SubTitle or "by : Quang Huy"
     
@@ -675,7 +675,7 @@ function bearlib:MakeWindow(Configs)
         end
     end;LoadFile()
     
-    local UISizeX, UISizeY = unpack(bearlib.Save.UISize)
+    local UISizeX, UISizeY = unpack(chuoilib.Save.UISize)
     
     local bgTransparency = 0.03
     
@@ -777,7 +777,7 @@ function bearlib:MakeWindow(Configs)
     }), "Text")
     
     local MainScroll = InsertTheme(Create("ScrollingFrame", Components, {
-        Size = UDim2.new(0, bearlib.Save.TabSize, 1, -TopBar.Size.Y.Offset),
+        Size = UDim2.new(0, chuoilib.Save.TabSize, 1, -TopBar.Size.Y.Offset),
         ScrollBarImageColor3 = Theme["Color Theme"],
         Position = UDim2.new(0, 0, 1, 0),
         AnchorPoint = Vector2.new(0, 1),
@@ -867,14 +867,14 @@ function bearlib:MakeWindow(Configs)
     
     ConnectSave(ControlSize1, function()
         if not Minimized then
-            bearlib.Save.UISize = {MainFrame.Size.X.Offset, MainFrame.Size.Y.Offset}
-            SaveJson("bear library v8.1.json", bearlib.Save)
+            chuoilib.Save.UISize = {MainFrame.Size.X.Offset, MainFrame.Size.Y.Offset}
+            SaveJson("bear library v8.1.json", chuoilib.Save)
         end
     end)
     
     ConnectSave(ControlSize2, function()
-        bearlib.Save.TabSize = MainScroll.Size.X.Offset
-        SaveJson("bear library v8.1.json", bearlib.Save)
+        chuoilib.Save.TabSize = MainScroll.Size.X.Offset
+        SaveJson("bear library v8.1.json", chuoilib.Save)
     end)
     
     local ButtonsFolder = Create("Folder", TopBar, {
@@ -945,7 +945,7 @@ function bearlib:MakeWindow(Configs)
     local function UpdateSearch(Query)
         Query = string.lower(Query)
         
-        for _, ElementData in pairs(bearlib.AllElements) do
+        for _, ElementData in pairs(chuoilib.AllElements) do
             if ElementData.Instance and ElementData.OriginalParent then
                 if ElementData.Instance.Parent == SearchContainer then
                     ElementData.Instance.Parent = ElementData.OriginalParent
@@ -956,7 +956,7 @@ function bearlib:MakeWindow(Configs)
         
         if Query == "" then return end
         
-        for _, ElementData in pairs(bearlib.AllElements) do
+        for _, ElementData in pairs(chuoilib.AllElements) do
             local Name = string.lower(ElementData.Name)
             local MatchName = string.find(Name, Query)
             
@@ -1226,9 +1226,9 @@ function bearlib:MakeWindow(Configs)
     
     function Window:SelectTab(TabSelect)
         if type(TabSelect) == "number" then
-            bearlib.Tabs[TabSelect].func:Enable()
+            chuoilib.Tabs[TabSelect].func:Enable()
         else
-            for _,Tab in pairs(bearlib.Tabs) do
+            for _,Tab in pairs(chuoilib.Tabs) do
                 if Tab.Cont == TabSelect.Cont then
                     Tab.func:Enable()
                 end
@@ -1242,7 +1242,7 @@ function bearlib:MakeWindow(Configs)
         local TName = Configs[1] or Configs.Title or "Tab!"
         local TIcon = Configs[2] or Configs.Icon or ""
         
-        TIcon = bearlib:GetIcon(TIcon)
+        TIcon = chuoilib:GetIcon(TIcon)
         if not TIcon:find("rbxassetid://") or TIcon:gsub("rbxassetid://", ""):len() < 6 then
             TIcon = false
         end
@@ -1324,7 +1324,7 @@ function bearlib:MakeWindow(Configs)
             end
             Container.Parent = Containers
             Container.Size = UDim2.new(1, 0, 1, 150)
-            table.foreach(bearlib.Tabs, function(_,Tab)
+            table.foreach(chuoilib.Tabs, function(_,Tab)
                 if Tab.Cont ~= Container then
                     Tab.func:Disable()
                 end
@@ -1339,7 +1339,7 @@ function bearlib:MakeWindow(Configs)
         
         FirstTab = true
         local Tab = {}
-        table.insert(bearlib.Tabs, {TabInfo = {Name = TName, Icon = TIcon}, func = Tab, Cont = Container})
+        table.insert(chuoilib.Tabs, {TabInfo = {Name = TName, Icon = TIcon}, func = Tab, Cont = Container})
         Tab.Cont = Container
         
         local ElementCount = 0
@@ -1399,7 +1399,7 @@ function bearlib:MakeWindow(Configs)
                 ZIndex = 2
             })
             
-            table.insert(bearlib.Instances, {
+            table.insert(chuoilib.Instances, {
                 Instance = UnderlineFrame,
                 Type = "UIBorder"
             })
@@ -1413,12 +1413,12 @@ function bearlib:MakeWindow(Configs)
             })
             UnderlineGradient.Parent = UnderlineFrame
             
-            table.insert(bearlib.Instances, {
+            table.insert(chuoilib.Instances, {
                 Instance = UnderlineGradient,
                 Type = "Gradient"
             })
             
-            table.insert(bearlib.AllElements, {
+            table.insert(chuoilib.AllElements, {
                 Name = SectionName,
                 Instance = SectionFrame,
                 OriginalParent = Container,
@@ -1428,7 +1428,7 @@ function bearlib:MakeWindow(Configs)
             })
             
             local Section = {}
-            table.insert(bearlib.Options, {type = "Section", Name = SectionName, func = Section})
+            table.insert(chuoilib.Options, {type = "Section", Name = SectionName, func = Section})
             
             function Section:Visible(Bool)
                 if Bool == nil then 
@@ -1458,7 +1458,7 @@ function bearlib:MakeWindow(Configs)
             local Frame, LabelFunc = ButtonFrame(Container, PName, PDesc, UDim2.new(1, -20))
             Frame.LayoutOrder = GetOrder()
             
-            table.insert(bearlib.AllElements, {
+            table.insert(chuoilib.AllElements, {
                 Name = PName,
                 Instance = Frame,
                 OriginalParent = Container,
@@ -1506,7 +1506,7 @@ function bearlib:MakeWindow(Configs)
                 Funcs:FireCallback(Callback)
             end)
             
-            table.insert(bearlib.AllElements, {
+            table.insert(chuoilib.AllElements, {
                 Name = BName,
                 Instance = FButton,
                 OriginalParent = Container,
@@ -1593,7 +1593,7 @@ function bearlib:MakeWindow(Configs)
                 SetToggle(not Default)
             end)
             
-            table.insert(bearlib.AllElements, {
+            table.insert(chuoilib.AllElements, {
                 Name = TName,
                 Instance = Button,
                 OriginalParent = Container,
@@ -1934,7 +1934,7 @@ function bearlib:MakeWindow(Configs)
             CalculatePos()
             CalculateSize()
             
-            table.insert(bearlib.AllElements, {
+            table.insert(chuoilib.AllElements, {
                 Name = DName,
                 Instance = Button,
                 OriginalParent = Container,
@@ -2117,7 +2117,7 @@ function bearlib:MakeWindow(Configs)
             
             SliderIcon:GetPropertyChangedSignal("Position"):Connect(UpdateValues) UpdateValues()
             
-            table.insert(bearlib.AllElements, {
+            table.insert(chuoilib.AllElements, {
                 Name = SName,
                 Instance = Button,
                 OriginalParent = Container,
@@ -2191,7 +2191,7 @@ function bearlib:MakeWindow(Configs)
                 ZIndex = 5
             })
             
-            table.insert(bearlib.AllElements, {
+            table.insert(chuoilib.AllElements, {
                 Name = TName,
                 Instance = Button,
                 OriginalParent = Container,
@@ -2479,7 +2479,7 @@ function bearlib:MakeWindow(Configs)
                 }, 2)
             end
             
-            table.insert(bearlib.AllElements, {
+            table.insert(chuoilib.AllElements, {
                 Name = "Discord Invite Container",
                 Instance = ContainerFrame,
                 OriginalParent = Container,
@@ -2724,7 +2724,7 @@ function bearlib:MakeWindow(Configs)
             DescLabel:GetPropertyChangedSignal("Text"):Connect(AdjustDescriptionHeight)
             task.spawn(AdjustDescriptionHeight)
             
-            table.insert(bearlib.AllElements, {
+            table.insert(chuoilib.AllElements, {
                 Name = Title .. " Discord Card",
                 Instance = CardContainer,
                 OriginalParent = Container,
@@ -2894,7 +2894,7 @@ function bearlib:MakeWindow(Configs)
                 TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
             }), "DarkText")
             
-            table.insert(bearlib.AllElements, {
+            table.insert(chuoilib.AllElements, {
                 Name = PName .. " Profile",
                 Instance = ProfileHolder,
                 OriginalParent = Container,
@@ -3010,7 +3010,7 @@ function bearlib:MakeWindow(Configs)
                 }) ClickDelay = false
             end)
 
-            table.insert(bearlib.AllElements, {
+            table.insert(chuoilib.AllElements, {
                 Name = Title,
                 Instance = InviteHolder,
                 OriginalParent = Container,
@@ -3317,7 +3317,7 @@ local function ProcessNotificationQueue()
     end
 end
 
-function bearlib:Notify(Configs)
+function chuoilib:Notify(Configs)
     local Title = Configs.Title or Configs[1] or "chuoiray Hub"
     local Message = Configs.Message or Configs[2] or Configs.Text or ""
     local Icon = Configs.Icon or "rbxassetid://125880166562763"
@@ -3335,10 +3335,10 @@ function bearlib:Notify(Configs)
     return true
 end
 
-function bearlib:SetUIBorderColor(color)
+function chuoilib:SetUIBorderColor(color)
     if typeof(color) == "Color3" then
         self.Themes[self.Save.Theme]["UI Border Color"] = color
-        if self.Save.Theme == bearlib.Save.Theme then
+        if self.Save.Theme == chuoilib.Save.Theme then
             Theme = self.Themes[self.Save.Theme]
             for _, Val in pairs(self.Instances) do
                 if Val.Type == "UIBorder" then
@@ -3354,10 +3354,10 @@ function bearlib:SetUIBorderColor(color)
     end
 end
 
-function bearlib:SetDiscordBorderColor(color)
+function chuoilib:SetDiscordBorderColor(color)
     if typeof(color) == "Color3" then
         self.Themes[self.Save.Theme]["Color Discord Border"] = color
-        if self.Save.Theme == bearlib.Save.Theme then
+        if self.Save.Theme == chuoilib.Save.Theme then
             Theme = self.Themes[self.Save.Theme]
             for _, Val in pairs(self.Instances) do
                 if Val.Type == "Stroke" then
@@ -3375,10 +3375,10 @@ function bearlib:SetDiscordBorderColor(color)
     end
 end
 
-function bearlib:SetProfileBorderColor(color)
+function chuoilib:SetProfileBorderColor(color)
     if typeof(color) == "Color3" then
         self.Themes[self.Save.Theme]["Color Profile Border"] = color
-        if self.Save.Theme == bearlib.Save.Theme then
+        if self.Save.Theme == chuoilib.Save.Theme then
             Theme = self.Themes[self.Save.Theme]
             for _, Val in pairs(self.Instances) do
                 if Val.Type == "Stroke" then
@@ -3392,10 +3392,10 @@ function bearlib:SetProfileBorderColor(color)
     end
 end
 
-function bearlib:SetHubColor(color)
+function chuoilib:SetHubColor(color)
     if typeof(color) == "Color3" then
         self.Themes[self.Save.Theme]["Color Hub 2"] = color
-        if self.Save.Theme == bearlib.Save.Theme then
+        if self.Save.Theme == chuoilib.Save.Theme then
             Theme = self.Themes[self.Save.Theme]
             for _, Val in pairs(self.Instances) do
                 if Val.Type == "Frame" then
@@ -3409,10 +3409,10 @@ function bearlib:SetHubColor(color)
     end
 end
 
-function bearlib:SetStrokeColor(color)
+function chuoilib:SetStrokeColor(color)
     if typeof(color) == "Color3" then
         self.Themes[self.Save.Theme]["Color Stroke"] = color
-        if self.Save.Theme == bearlib.Save.Theme then
+        if self.Save.Theme == chuoilib.Save.Theme then
             Theme = self.Themes[self.Save.Theme]
             for _, Val in pairs(self.Instances) do
                 if Val.Type == "Stroke" then
@@ -3431,10 +3431,10 @@ function bearlib:SetStrokeColor(color)
     end
 end
 
-function bearlib:SetTextColor(color)
+function chuoilib:SetTextColor(color)
     if typeof(color) == "Color3" then
         self.Themes[self.Save.Theme]["Color Text"] = color
-        if self.Save.Theme == bearlib.Save.Theme then
+        if self.Save.Theme == chuoilib.Save.Theme then
             Theme = self.Themes[self.Save.Theme]
             for _, Val in pairs(self.Instances) do
                 if Val.Type == "Text" then
@@ -3447,55 +3447,55 @@ function bearlib:SetTextColor(color)
     end
 end
 
-function bearlib:SetToggleOnColor(color)
+function chuoilib:SetToggleOnColor(color)
     if typeof(color) == "Color3" then
         self.Themes[self.Save.Theme]["Color Toggle On"] = color
-        if self.Save.Theme == bearlib.Save.Theme then
+        if self.Save.Theme == chuoilib.Save.Theme then
             Theme = self.Themes[self.Save.Theme]
         end
     end
 end
 
-function bearlib:SetToggleOffColor(color)
+function chuoilib:SetToggleOffColor(color)
     if typeof(color) == "Color3" then
         self.Themes[self.Save.Theme]["Color Toggle Off"] = color
-        if self.Save.Theme == bearlib.Save.Theme then
+        if self.Save.Theme == chuoilib.Save.Theme then
             Theme = self.Themes[self.Save.Theme]
         end
     end
 end
 
-function bearlib:SetToggleKnobOnColor(color)
+function chuoilib:SetToggleKnobOnColor(color)
     if typeof(color) == "Color3" then
         self.Themes[self.Save.Theme]["Color Toggle Knob On"] = color
-        if self.Save.Theme == bearlib.Save.Theme then
+        if self.Save.Theme == chuoilib.Save.Theme then
             Theme = self.Themes[self.Save.Theme]
         end
     end
 end
 
-function bearlib:SetToggleKnobOffColor(color)
+function chuoilib:SetToggleKnobOffColor(color)
     if typeof(color) == "Color3" then
         self.Themes[self.Save.Theme]["Color Toggle Knob Off"] = color
-        if self.Save.Theme == bearlib.Save.Theme then
+        if self.Save.Theme == chuoilib.Save.Theme then
             Theme = self.Themes[self.Save.Theme]
         end
     end
 end
 
-function bearlib:SetToggleBorderColor(color)
+function chuoilib:SetToggleBorderColor(color)
     if typeof(color) == "Color3" then
         self.Themes[self.Save.Theme]["Color Toggle Border"] = color
-        if self.Save.Theme == bearlib.Save.Theme then
+        if self.Save.Theme == chuoilib.Save.Theme then
             Theme = self.Themes[self.Save.Theme]
         end
     end
 end
 
-function bearlib:SetBorderThickness(thickness)
+function chuoilib:SetBorderThickness(thickness)
     if type(thickness) == "number" then
         self.Themes[self.Save.Theme]["Border Thickness"] = thickness
-        if self.Save.Theme == bearlib.Save.Theme then
+        if self.Save.Theme == chuoilib.Save.Theme then
             Theme = self.Themes[self.Save.Theme]
             for _, Val in pairs(self.Instances) do
                 if Val.Type == "Stroke" or Val.Type == "UIBorder" then
@@ -3506,7 +3506,7 @@ function bearlib:SetBorderThickness(thickness)
     end
 end
 
-function bearlib:GetBorderColors()
+function chuoilib:GetBorderColors()
     return {
         UI = Theme["UI Border Color"],
         Discord = Theme["Color Discord Border"],
@@ -3516,7 +3516,7 @@ function bearlib:GetBorderColors()
     }
 end
 
-function bearlib:GetToggleColors()
+function chuoilib:GetToggleColors()
     return {
         ToggleOn = Theme["Color Toggle On"],
         ToggleOff = Theme["Color Toggle Off"],
@@ -3526,15 +3526,15 @@ function bearlib:GetToggleColors()
     }
 end
 
-function bearlib:ResetBorderColors()
-    local defaultTheme = self.Themes.QuangHuy
+function chuoilib:ResetBorderColors()
+    local defaultTheme = self.Themes.hellocun
     self.Themes[self.Save.Theme]["UI Border Color"] = defaultTheme["UI Border Color"]
     self.Themes[self.Save.Theme]["Color Discord Border"] = defaultTheme["Color Discord Border"]
     self.Themes[self.Save.Theme]["Color Profile Border"] = defaultTheme["Color Profile Border"]
     self.Themes[self.Save.Theme]["Color Stroke"] = defaultTheme["Color Stroke"]
     self.Themes[self.Save.Theme]["Border Thickness"] = defaultTheme["Border Thickness"]
     
-    if self.Save.Theme == bearlib.Save.Theme then
+    if self.Save.Theme == chuoilib.Save.Theme then
         Theme = self.Themes[self.Save.Theme]
         for _, Val in pairs(self.Instances) do
             if Val.Type == "Stroke" then
@@ -3560,26 +3560,26 @@ function bearlib:ResetBorderColors()
     end
 end
 
-function bearlib:ResetToggleColors()
-    local defaultTheme = self.Themes.QuangHuy
+function chuoilib:ResetToggleColors()
+    local defaultTheme = self.Themes.hellocun
     self.Themes[self.Save.Theme]["Color Toggle On"] = defaultTheme["Color Toggle On"]
     self.Themes[self.Save.Theme]["Color Toggle Off"] = defaultTheme["Color Toggle Off"]
     self.Themes[self.Save.Theme]["Color Toggle Knob On"] = defaultTheme["Color Toggle Knob On"]
     self.Themes[self.Save.Theme]["Color Toggle Knob Off"] = defaultTheme["Color Toggle Knob Off"]
     self.Themes[self.Save.Theme]["Color Toggle Border"] = defaultTheme["Color Toggle Border"]
     
-    if self.Save.Theme == bearlib.Save.Theme then
+    if self.Save.Theme == chuoilib.Save.Theme then
         Theme = self.Themes[self.Save.Theme]
     end
 end
 
 task.spawn(function()
     task.wait(2)
-    bearlib:Notify({
-        Title = "Bear Library",
-        Message = "UI Bear Library Download Completed",
+    chuoilib:Notify({
+        Title = "chuoiray ui",
+        Message = "UI chuoiray load Completed",
         Duration = 10
     })
 end)
 
-return bearlib
+return chuoilib
