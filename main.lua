@@ -757,7 +757,7 @@ function chuoilib:MakeWindow(Configs)
         Position = UDim2.new(0, 0, 0.5),
         AnchorPoint = Vector2.new(0, 0.5),
         BackgroundTransparency = 1,
-        Image = "rbxassetid://125880166562763",
+        Image = "rbxassetid://94508823513313",
         ImageColor3 = Theme["Color Text"],
         Name = "MinimizedIcon"
     })
@@ -868,13 +868,13 @@ function chuoilib:MakeWindow(Configs)
     ConnectSave(ControlSize1, function()
         if not Minimized then
             chuoilib.Save.UISize = {MainFrame.Size.X.Offset, MainFrame.Size.Y.Offset}
-            SaveJson("bear library v8.1.json", chuoilib.Save)
+            SaveJson("chuoiray library v8.1.json", chuoilib.Save)
         end
     end)
     
     ConnectSave(ControlSize2, function()
         chuoilib.Save.TabSize = MainScroll.Size.X.Offset
-        SaveJson("bear library v8.1.json", chuoilib.Save)
+        SaveJson("chuoiray library v8.1.json", chuoilib.Save)
     end)
     
     local ButtonsFolder = Create("Folder", TopBar, {
@@ -886,7 +886,7 @@ function chuoilib:MakeWindow(Configs)
         Position = UDim2.new(1, -10, 0.5),
         AnchorPoint = Vector2.new(1, 0.5),
         BackgroundTransparency = 1,
-        Image = "rbxassetid://125880166562763",
+        Image = "rbxassetid://94508823513313",
         AutoButtonColor = false,
         Name = "Close"
     })
@@ -896,7 +896,7 @@ function chuoilib:MakeWindow(Configs)
         Position = UDim2.new(1, -35, 0.5),
         AnchorPoint = Vector2.new(1, 0.5),
         BackgroundTransparency = 1,
-        Image = "rbxassetid://125880166562763",
+        Image = "rbxassetid://94508823513313",
         ImageColor3 = Theme["Color Text"],
         AutoButtonColor = false,
         Name = "Minimize"
@@ -907,7 +907,7 @@ function chuoilib:MakeWindow(Configs)
         Position = UDim2.new(1, -60, 0.5),
         AnchorPoint = Vector2.new(1, 0.5),
         BackgroundTransparency = 1,
-        Image = "rbxassetid://125880166562763",
+        Image = "rbxassetid://94508823513313",
         ImageColor3 = Theme["Color Text"],
         Name = "Search"
     })
@@ -1042,13 +1042,13 @@ function chuoilib:MakeWindow(Configs)
         WaitClick = true
         
         if Minimized then
-            MinimizeButton.Image = "rbxassetid://125880166562763"
+            MinimizeButton.Image = "rbxassetid://94508823513313"
             CreateTween({MainFrame, "Size", SaveSize, 0.25, true})
             ControlSize1.Visible = true
             ControlSize2.Visible = true
             Minimized = false
         else
-            MinimizeButton.Image = "rbxassetid://125880166562763"
+            MinimizeButton.Image = "rbxassetid://94508823513313"
             SaveSize = MainFrame.Size
             ControlSize1.Visible = false
             ControlSize2.Visible = false
@@ -1498,7 +1498,7 @@ function chuoilib:MakeWindow(Configs)
                 Position = UDim2.new(1, -10, 0.5),
                 AnchorPoint = Vector2.new(1, 0.5),
                 BackgroundTransparency = 1,
-                Image = "rbxassetid://125880166562763",
+                Image = "rbxassetid://94508823513313",
                 ZIndex = 5
             })
             
@@ -1658,7 +1658,7 @@ function chuoilib:MakeWindow(Configs)
                 Size = UDim2.new(0, 15, 0, 15),
                 Position = UDim2.new(0, -5, 0.5),
                 AnchorPoint = Vector2.new(1, 0.5),
-                Image = "rbxassetid://125880166562763",
+                Image = "rbxassetid://94508823513313",
                 BackgroundTransparency = 1,
                 ZIndex = 5
             })
@@ -1710,7 +1710,7 @@ function chuoilib:MakeWindow(Configs)
                 CreateTween({Arrow, "Rotation", 0, 0.2})
                 CreateTween({DropFrame, "Size", UDim2.new(0, 152, 0, 0), 0.2, true})
                 CreateTween({Arrow, "ImageColor3", Color3.fromRGB(255, 255, 255), 0.2})
-                Arrow.Image = "rbxassetid://125880166562763"
+                Arrow.Image = "rbxassetid://94508823513313"
                 NoClickFrame.Visible = false
                 WaitClick = false
             end
@@ -1737,13 +1737,13 @@ function chuoilib:MakeWindow(Configs)
                 if WaitClick then return end
                 WaitClick = true
                 if NoClickFrame.Visible then
-                    Arrow.Image = "rbxassetid://125880166562763"
+                    Arrow.Image = "rbxassetid://94508823513313"
                     CreateTween({Arrow, "ImageColor3", Color3.fromRGB(255, 255, 255), 0.2})
                     CreateTween({DropFrame, "Size", UDim2.new(0, 152, 0, 0), 0.2, true})
                     NoClickFrame.Visible = false
                 else
                     NoClickFrame.Visible = true
-                    Arrow.Image = "rbxassetid://125880166562763"
+                    Arrow.Image = "rbxassetid://94508823513313"
                     CreateTween({Arrow, "ImageColor3", Theme["Color Theme"], 0.2})
                     CreateTween({DropFrame, "Size", GetFrameSize(), 0.2, true})
                 end
@@ -2186,7 +2186,7 @@ function chuoilib:MakeWindow(Configs)
                 Size = UDim2.new(0, 12, 0, 12),
                 Position = UDim2.new(0, -5, 0.5),
                 AnchorPoint = Vector2.new(1, 0.5),
-                Image = "rbxassetid://125880166562763",
+                Image = "rbxassetid://94508823513313",
                 BackgroundTransparency = 1,
                 ZIndex = 5
             })
@@ -2600,7 +2600,7 @@ function chuoilib:MakeWindow(Configs)
                 local VerifyIcon = Create("ImageLabel", Card, {
                     Size = UDim2.fromOffset(16, 16),
                     Position = UDim2.new(0, 75 + NameLabel.TextBounds.X + 5, 0, 50),
-                    Image = "rbxassetid://125880166562763",
+                    Image = "rbxassetid://94508823513313",
                     ImageColor3 = Color3.fromRGB(60, 140, 255),
                     BackgroundTransparency = 1,
                     ZIndex = 4
@@ -2869,7 +2869,7 @@ function chuoilib:MakeWindow(Configs)
                 local VerifyIcon = Create("ImageLabel", Card, {
                     Size = UDim2.fromOffset(14, 14),
                     Position = UDim2.new(0, 65 + NameLabel.TextBounds.X + 4, 0, 52),
-                    Image = "rbxassetid://125880166562763",
+                    Image = "rbxassetid://94508823513313",
                     ImageColor3 = Color3.fromRGB(60, 140, 255),
                     BackgroundTransparency = 1,
                     ZIndex = 4
@@ -3038,7 +3038,7 @@ function chuoilib:MakeWindow(Configs)
         ToggleButton.Name = "ToggleButton"
         ToggleButton.Size = UDim2.new(0, 50, 0, 50)
         ToggleButton.Position = UDim2.new(0.12, 0, 0.12, 0)
-        ToggleButton.Image = "rbxassetid://125880166562763"
+        ToggleButton.Image = "rbxassetid://94508823513313"
         ToggleButton.BackgroundColor3 = Theme["Color Hub 2"]
         ToggleButton.BackgroundTransparency = 0.2
         ToggleButton.Active = true
@@ -3057,7 +3057,7 @@ function chuoilib:MakeWindow(Configs)
         Flag.Name = "VNFlagIcon"
         Flag.Parent = ToggleButton
         Flag.BackgroundTransparency = 1
-        Flag.Image = "rbxassetid://125880166562763"
+        Flag.Image = "rbxassetid://94508823513313"
         Flag.Size = UDim2.fromOffset(28, 18)
         Flag.AnchorPoint = Vector2.new(0.5, 0.5)
         Flag.Position = UDim2.new(1, -2, 0, 2)
@@ -3186,7 +3186,7 @@ local function CreateNotification(Icon, Title, Message, Duration)
     IconImage.Size = UDim2.new(1, 0, 1, 0)
     IconImage.BackgroundTransparency = 1
     IconImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    IconImage.Image = Icon or "rbxassetid://125880166562763"
+    IconImage.Image = Icon or "rbxassetid://94508823513313"
     IconImage.ImageColor3 = Color3.fromRGB(255, 255, 255)
     IconImage.ScaleType = Enum.ScaleType.Fit
     IconImage.BorderSizePixel = 0
@@ -3320,7 +3320,7 @@ end
 function chuoilib:Notify(Configs)
     local Title = Configs.Title or Configs[1] or "chuoiray Hub"
     local Message = Configs.Message or Configs[2] or Configs.Text or ""
-    local Icon = Configs.Icon or "rbxassetid://125880166562763"
+    local Icon = Configs.Icon or "rbxassetid://94508823513313"
     local Duration = Configs.Duration or Configs.Time or 5
     
     table.insert(NotificationQueue, {
@@ -3572,5 +3572,69 @@ function chuoilib:ResetToggleColors()
         Theme = self.Themes[self.Save.Theme]
     end
 end
+function chuoilib:Notify(Configs)
+    local Title = Configs.Title or "Thông báo"
+    local Content = Configs.Content or ""
+    local Duration = Configs.Duration or 5
+    
+    -- Khung thông báo
+    local NotifyFrame = InsertTheme(Create("Frame", ScreenGui, {
+        Size = UDim2.new(0, 260, 0, 75),
+        Position = UDim2.new(1, 30, 1, -100), 
+        BackgroundColor3 = Theme["Color Hub 2"],
+        ZIndex = 100
+    }), "Frame")
+    Make("Corner", NotifyFrame, UDim.new(0, 6))
+    Make("Stroke", NotifyFrame)
 
+    local TLabel = InsertTheme(Create("TextLabel", NotifyFrame, {
+        Size = UDim2.new(1, -20, 0, 25),
+        Position = UDim2.new(0, 10, 0, 5),
+        BackgroundTransparency = 1,
+        Text = Title,
+        TextColor3 = Theme["Color Theme"], 
+        TextSize = 13,
+        Font = Enum.Font.GothamBold,
+        TextXAlignment = "Left",
+    }), "Theme")
+
+    local CLabel = InsertTheme(Create("TextLabel", NotifyFrame, {
+        Size = UDim2.new(1, -20, 0, 35),
+        Position = UDim2.new(0, 10, 0, 28),
+        BackgroundTransparency = 1,
+        Text = Content,
+        TextColor3 = Theme["Color Text"],
+        TextSize = 11,
+        Font = Enum.Font.Gotham,
+        TextWrapped = true,
+        TextXAlignment = "Left",
+        TextYAlignment = "Top",
+    }), "Text")
+
+    local BarBG = Create("Frame", NotifyFrame, {
+        Size = UDim2.new(1, -20, 0, 4),
+        Position = UDim2.new(0, 10, 1, -12),
+        BackgroundColor3 = Color3.fromRGB(35, 35, 35), 
+        BorderSizePixel = 0
+    })
+    
+    local ProgressBar = InsertTheme(Create("Frame", BarBG, {
+        Size = UDim2.new(1, 0, 1, 0), 
+        BackgroundColor3 = Theme["Color Theme"], 
+        BorderSizePixel = 0
+    }), "Theme")
+
+    CreateTween({NotifyFrame, "Position", UDim2.new(1, -270, 1, -100), 0.5})
+
+    local barTween = TweenService:Create(ProgressBar, TweenInfo.new(Duration, Enum.EasingStyle.Linear), {
+        Size = UDim2.new(0, 0, 1, 0)
+    })
+    barTween:Play()
+
+    barTween.Completed:Connect(function()
+        local slideOut = CreateTween({NotifyFrame, "Position", UDim2.new(1, 30, 1, -100), 0.5})
+        slideOut.Completed:Wait()
+        NotifyFrame:Destroy()
+    end)
+end
 return chuoilib
